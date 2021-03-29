@@ -22,17 +22,63 @@ public class RSA {
         while (true) {
             BigInteger random = Utilities.getRandomBelow(this.n);
             if (Prime.doesNotContainPrimeFactor(random)) {
-                System.out.println("e is " + random);
+                this.e = random;
+                calculateD();
                 return random;
             }
         }
     }
 
+    public boolean validateE(BigInteger e) {
+        if (e.compareTo(this.n) < 0){
+            return Prime.doesNotContainPrimeFactor(e);
+        } else {
+            return false;
+        }
+    }
+
     public BigInteger calculatePHI() {
-        return (this.primes.value1.subtract(BigInteger.ONE).multiply(this.primes.value2.subtract(BigInteger.ONE)));
+        this.phi = (this.primes.value1.subtract(BigInteger.ONE).multiply(this.primes.value2.subtract(BigInteger.ONE)));
+        return this.phi;
     }
 
     public BigInteger calculateD() {
-        return this.e.modPow(BigInteger.valueOf(-1), calculatePHI());
+        this.d = this.e.modPow(BigInteger.valueOf(-1), calculatePHI());
+        return this.d;
+    }
+
+    public BigInteger getN() {
+        return n;
+    }
+
+    public Pair getPrimes() {
+        return primes;
+    }
+
+    public BigInteger getE() {
+        return e;
+    }
+
+    public void setE(BigInteger e) {
+        this.e = e;
+    }
+
+    public BigInteger getD() {
+        return d;
+    }
+
+    public BigInteger getPhi() {
+        return phi;
+    }
+
+    @Override
+    public String toString() {
+        return "RSA{" +
+                "n=" + n +
+                ", primes=" + primes +
+                ", e=" + e +
+                ", d=" + d +
+                ", phi=" + phi +
+                '}';
     }
 }
