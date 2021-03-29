@@ -1,20 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16">
-  <tabs>
-    <Tab text="Untitled Tab 1">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-      </content>
-    </Tab>
-    <Tab text="Untitled Tab 2">
-      <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-      </content>
-    </Tab>
-  </tabs>
-</TabPane>
+<SplitPane dividerPositions="0.4" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" fx:controller="sample.Controller" xmlns:fx="http://javafx.com/fxml/1">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="N =" />
+            <Label layoutX="15.0" layoutY="43.0" text="P =" />
+            <Label layoutX="14.0" layoutY="72.0" text="Q =" />
+            <Label layoutX="13.0" layoutY="102.0" text="E =" />
+            <Label layoutX="11.0" layoutY="134.0" text="D =" />
+            <Label layoutX="10.0" layoutY="163.0" text="PHI =" />
+            <TextField layoutX="52.0" layoutY="10.0" fx:id="valueOfN"/>
+            <TextField layoutX="52.0" layoutY="39.0" fx:id="valueOfP"/>
+            <TextField layoutX="52.0" layoutY="68.0" fx:id="valueOfQ"/>
+            <TextField layoutX="52.0" layoutY="98.0" />
+            <TextField layoutX="52.0" layoutY="130.0" />
+            <TextField layoutX="52.0" layoutY="159.0" />
+            <Button layoutX="668.0" layoutY="10.0" mnemonicParsing="false" text="Calculate p and q" onAction="#calculatePAndQ"/>
+            <Button layoutX="668.0" layoutY="98.0" mnemonicParsing="false" text="Calculate e" />
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+         <children>
+            <TabPane layoutX="-1.0" layoutY="-1.0" prefHeight="356.0" prefWidth="798.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Encryption">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="230.0" prefWidth="798.0">
+                           <children>
+                              <Label layoutX="14.0" layoutY="14.0" text="Message text =" />
+                              <Label layoutX="14.0" layoutY="164.0" text="Message encrypted =" />
+                              <TextArea layoutX="141.0" layoutY="14.0" prefHeight="140.0" prefWidth="300.0" />
+                              <TextArea editable="false" layoutX="141.0" layoutY="164.0" prefHeight="140.0" prefWidth="300.0" />
+                              <Button layoutX="678.0" layoutY="20.0" mnemonicParsing="false" text="Encrypt message" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Decryption">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutX="14.0" layoutY="14.0" text="Message encrypted =" />
+                              <Label layoutX="14.0" layoutY="164.0" text="Message decrypted =" />
+                              <TextArea layoutX="145.0" layoutY="14.0" prefHeight="140.0" prefWidth="300.0" />
+                              <TextArea editable="false" layoutX="145.0" layoutY="164.0" prefHeight="140.0" prefWidth="300.0" />
+                              <Button layoutX="675.0" layoutY="19.0" mnemonicParsing="false" text="Decrypt message" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </children></AnchorPane>
+  </items>
+</SplitPane>
