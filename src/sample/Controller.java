@@ -2,9 +2,11 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.math.BigInteger;
+import java.util.List;
 
 public class Controller {
 
@@ -20,6 +22,10 @@ public class Controller {
     @FXML private TextField valueOfE;
     @FXML private TextField valueOfD;
     @FXML private TextField valueOfPHI;
+    @FXML private TextArea valueOfEText;
+    @FXML private TextArea valueOfEEncryptedText;
+    @FXML private TextArea valueOfDEncryptedText;
+    @FXML private TextArea valueOfDDecryptedText;
 
     @FXML
     private void calculatePAndQ() {
@@ -69,6 +75,21 @@ public class Controller {
             valueOfD.setText(rsa.getD().toString());
         }
         System.out.println(isValid);
+    }
+
+    @FXML
+    private void encryptMessage() {
+        List<BigInteger> list = Encrypt.encryptMessage(valueOfEText.getText(), rsa.getN(), rsa.getE());
+        String result = "";
+        for (BigInteger b : list) {
+            result += b.toString() + ", ";
+        }
+        valueOfEEncryptedText.setText(result);
+    }
+
+    @FXML
+    private void decryptMessage() {
+
     }
 
     private void addErrorMessage(String msg) {
