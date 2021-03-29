@@ -19,9 +19,9 @@
             <Label layoutX="13.0" layoutY="102.0" text="E =" />
             <Label layoutX="11.0" layoutY="134.0" text="D =" />
             <Label layoutX="10.0" layoutY="163.0" text="PHI =" />
-            <TextField layoutX="52.0" layoutY="10.0" />
-            <TextField layoutX="52.0" layoutY="39.0" />
-            <TextField layoutX="52.0" layoutY="68.0" />
+            <TextField layoutX="52.0" layoutY="10.0" fx:id="valueOfN"/>
+            <TextField layoutX="52.0" layoutY="39.0" fx:id="valueOfP"/>
+            <TextField layoutX="52.0" layoutY="68.0" fx:id="valueOfQ"/>
             <TextField layoutX="52.0" layoutY="98.0" />
             <TextField layoutX="52.0" layoutY="130.0" />
             <TextField layoutX="52.0" layoutY="159.0" />
