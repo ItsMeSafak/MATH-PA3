@@ -6,6 +6,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Controller {
@@ -16,6 +17,7 @@ public class Controller {
     private RSA rsa;
 
     @FXML private Label errorMessage;
+    @FXML private Label exampleInput;
     @FXML private TextField valueOfN;
     @FXML private TextField valueOfP;
     @FXML private TextField valueOfQ;
@@ -80,17 +82,28 @@ public class Controller {
     @FXML
     private void encryptMessage() {
         List<BigInteger> list = Encrypt.encryptMessage(valueOfEText.getText(), rsa.getN(), rsa.getE());
-        String result = "";
-        for (BigInteger b : list) {
-            result += b.toString() + ", ";
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < list.toArray().length; i++){
+            if (i == (list.toArray().length - 1)) {
+                result.append(list.get(i).toString());
+            } else {
+                result.append(list.get(i).toString()).append(", ");
+            }
         }
-        valueOfEEncryptedText.setText(result);
+        valueOfEEncryptedText.setText(result.toString());
+        exampleInput.setText("Example input: " + result.toString());
     }
 
     @FXML
     private void decryptMessage() {
-
+        List<BigInteger> encryptedMessage = new ArrayList();
+        for (String numberAsString : valueOfDEncryptedText.getText().split(", ")) {
+            encryptedMessage.add(new BigInteger(numberAsString));
+        }
+        String decryptedMessage = Decrypt.decryptMessage(encryptedMessage, rsa.getN(), rsa.getD());
+        valueOfDDecryptedText.setText(decryptedMessage);
     }
+
 
     private void addErrorMessage(String msg) {
         errorMessage.setText(errorMessage.getText() + "\n" + msg);

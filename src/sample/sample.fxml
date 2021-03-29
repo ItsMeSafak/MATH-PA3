@@ -58,6 +58,8 @@
                                         <TextArea fx:id="valueOfDEncryptedText" layoutX="145.0" layoutY="14.0" prefHeight="140.0" prefWidth="300.0" />
                                         <TextArea fx:id="valueOfDDecryptedText" editable="false" layoutX="145.0" layoutY="164.0" prefHeight="140.0" prefWidth="300.0" />
                                         <Button layoutX="675.0" layoutY="19.0" mnemonicParsing="false" onAction="#decryptMessage" text="Decrypt message" />
+                                        <Label layoutX="451.0" layoutY="11.0" prefHeight="41.0" prefWidth="209.0" text="Make sure the numbers are seperated by a ', '." wrapText="true" />
+                                        <Label fx:id="exampleInput" layoutX="451.0" layoutY="52.0" prefHeight="41.0" prefWidth="209.0" wrapText="true" />
                                     </children>
                                 </AnchorPane>
                             </content>
