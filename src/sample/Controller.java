@@ -6,6 +6,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.math.BigInteger;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,34 +18,50 @@ public class Controller {
 
     private RSA rsa;
 
-    @FXML private Label errorMessage;
-    @FXML private Label exampleInput;
-    @FXML private TextField valueOfN;
-    @FXML private TextField valueOfP;
-    @FXML private TextField valueOfQ;
-    @FXML private TextField valueOfE;
-    @FXML private TextField valueOfD;
-    @FXML private TextField valueOfPHI;
-    @FXML private TextArea valueOfEText;
-    @FXML private TextArea valueOfEEncryptedText;
-    @FXML private TextArea valueOfDEncryptedText;
-    @FXML private TextArea valueOfDDecryptedText;
+    @FXML
+    private Label errorMessage;
+    @FXML
+    private Label exampleInput;
+    @FXML
+    private Label timeNeeded;
+    @FXML
+    private TextField valueOfN;
+    @FXML
+    private TextField valueOfP;
+    @FXML
+    private TextField valueOfQ;
+    @FXML
+    private TextField valueOfE;
+    @FXML
+    private TextField valueOfD;
+    @FXML
+    private TextField valueOfPHI;
+    @FXML
+    private TextArea valueOfEText;
+    @FXML
+    private TextArea valueOfEEncryptedText;
+    @FXML
+    private TextArea valueOfDEncryptedText;
+    @FXML
+    private TextArea valueOfDDecryptedText;
 
     @FXML
     private void calculatePAndQ() {
-       if (valueOfN.getText().isEmpty()) {
-           addErrorMessage(ERROR_MESSAGE_N);
-           clearFields();
-           return;
-       }
+        if (valueOfN.getText().isEmpty()) {
+            addErrorMessage(ERROR_MESSAGE_N);
+            clearFields();
+            return;
+        }
 
+        Instant startTime = Instant.now();
         rsa = new RSA(new BigInteger(valueOfN.getText()));
+        Instant endTime = Instant.now();
         valueOfP.setText(rsa.getPrimes().value1.toString());
         valueOfQ.setText(rsa.getPrimes().value2.toString());
         valueOfE.setText(rsa.getE().toString());
         valueOfD.setText(rsa.getD().toString());
         valueOfPHI.setText(rsa.getPhi().toString());
-        System.out.println(rsa.toString());
+        timeNeeded.setText("Time needed: " + Duration.between(startTime, endTime).toMillis() + "ms");
     }
 
     @FXML
@@ -56,7 +74,6 @@ public class Controller {
         rsa.calculateE();
         valueOfE.setText(rsa.getE().toString());
         valueOfD.setText(rsa.getD().toString());
-        System.out.println(rsa.toString());
     }
 
     @FXML
@@ -76,20 +93,20 @@ public class Controller {
             rsa.calculateD();
             valueOfD.setText(rsa.getD().toString());
         }
-        System.out.println(isValid);
     }
 
     @FXML
     private void encryptMessage() {
         List<BigInteger> list = Encrypt.encryptMessage(valueOfEText.getText(), rsa.getN(), rsa.getE());
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < list.toArray().length; i++){
+        for (int i = 0; i < list.toArray().length; i++) {
             if (i == (list.toArray().length - 1)) {
                 result.append(list.get(i).toString());
             } else {
                 result.append(list.get(i).toString()).append(", ");
             }
         }
+        valueOfDEncryptedText.setText(result.toString());
         valueOfEEncryptedText.setText(result.toString());
         exampleInput.setText("Example input: " + result.toString());
     }
@@ -101,6 +118,7 @@ public class Controller {
             encryptedMessage.add(new BigInteger(numberAsString));
         }
         String decryptedMessage = Decrypt.decryptMessage(encryptedMessage, rsa.getN(), rsa.getD());
+        valueOfEText.setText(decryptedMessage);
         valueOfDDecryptedText.setText(decryptedMessage);
     }
 
