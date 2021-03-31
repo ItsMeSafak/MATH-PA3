@@ -43,7 +43,7 @@ public class RSA {
     }
 
     public BigInteger calculateD() {
-        this.d = this.e.modPow(BigInteger.valueOf(-1), calculatePHI());
+        this.d = this.e.modInverse(calculatePHI());
         return this.d;
     }
 

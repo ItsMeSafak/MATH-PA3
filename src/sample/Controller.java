@@ -103,7 +103,7 @@ public class Controller {
             if (i == (list.toArray().length - 1)) {
                 result.append(list.get(i).toString());
             } else {
-                result.append(list.get(i).toString()).append(", ");
+                result.append(list.get(i).toString()).append(",");
             }
         }
         valueOfDEncryptedText.setText(result.toString());
@@ -114,7 +114,7 @@ public class Controller {
     @FXML
     private void decryptMessage() {
         List<BigInteger> encryptedMessage = new ArrayList();
-        for (String numberAsString : valueOfDEncryptedText.getText().split(", ")) {
+        for (String numberAsString : valueOfDEncryptedText.getText().split(",")) {
             encryptedMessage.add(new BigInteger(numberAsString));
         }
         String decryptedMessage = Decrypt.decryptMessage(encryptedMessage, rsa.getN(), rsa.getD());
